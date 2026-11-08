@@ -7,11 +7,11 @@
 > turn into cards automatically and vanish when they end; you can pin, shelf, rename,
 > edit or delete any of them inline. Zero dependencies, hand-written bundle, no build step.
 
-![会话卡 / live session card](preview.png)
+![会话卡 / live session card](https://raw.githubusercontent.com/silversystem04-coder/dsh-project-tabs/main/preview.png)
 
 | | |
 |---|---|
-| ![项目线卡](preview-brain.png) | ![其余与收纳](preview-more.png) |
+| ![项目线卡](https://raw.githubusercontent.com/silversystem04-coder/dsh-project-tabs/main/preview-brain.png) | ![其余与收纳](https://raw.githubusercontent.com/silversystem04-coder/dsh-project-tabs/main/preview-more.png) |
 
 窗口顶边一排小角，一张角一样东西：**一条线**、**一个正在跑的会话**、或者**你自己加的一张卡**。
 鼠标停上去往下掉一张卡；点一下钉住，再点或 Esc 收起（角移到卡上有 240ms 缓冲，不会中途收掉）。
@@ -123,9 +123,15 @@
 
 ## 装
 
-两种方式，选一个。
+三种方式，选一个。
 
-**A. 从 GitHub 装**（目前唯一能一步装上的方式）
+**A. 从 npm 装**（推荐，插件市场里也是这个）
+
+```bash
+dsh plugin --profile web add dsh-project-tabs
+```
+
+**B. 从 GitHub 装**
 
 ```bash
 dsh plugin --profile web add github:silversystem04-coder/dsh-project-tabs
@@ -133,7 +139,7 @@ dsh plugin --profile web add github:silversystem04-coder/dsh-project-tabs
 
 装完重启 DSH（host 半边是启动时加载的）。
 
-**B. 本地装**（想改代码、或者想让它接上你自己的 `brain/`）
+**C. 本地装**（想改代码、或者想让它接上你自己的 `brain/`）
 
 ```powershell
 # 只装插件（会话卡 + 手写卡，不需要任何前置数据）
@@ -147,7 +153,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dsh-project-tabs\install.ps1
 复制到 profile 的 `plugins\` 与 `node_modules\`（同一路径重复载入会用旧模块缓存，所以每次整目录覆盖），
 再把 `cordis.patch.yml` 缺的 `insert` 补上。`-Profile` 默认 `~\.dsh\profiles\desktop`。
 
-> npm 包名 `dsh-project-tabs` 已预留；发布后 `dsh plugin --profile web add dsh-project-tabs` 也能装。
+> 已发布到 npm：<https://www.npmjs.com/package/dsh-project-tabs>（v0.2.1）。
 
 **没有 `projects.json` 也能用**：那时没有线卡，只剩会话卡和手写卡，条带上会常驻一行灰字说明。
 `brainDir` 指向的目录只要在 `journal\projects.json` 放一个数组就行，格式见下面的「配置」。

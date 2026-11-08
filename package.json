@@ -1,6 +1,6 @@
 {
   "name": "dsh-project-tabs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "DSH 插件：窗口最上方一排标签角——线卡 + 实时会话卡 + 手写卡，含进度、当前步骤、收纳与自定义 / Top-edge tabs: project lines, live sessions with current step, manual cards, shelf and inline editing.",
   "type": "module",
   "main": "index.js",

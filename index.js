@@ -35,7 +35,7 @@ export const name = 'project-tabs';
 export const inject = ['webServer'];
 
 /** 手改；出现在 /ping 里，好判断模块缓存是不是旧的。 */
-const BUILD = '0.2.0+20261108';
+const BUILD = '0.2.1+20261108';
 
 const PREFIX = '/project-tabs';
 const MAX_BODY = 128 * 1024;

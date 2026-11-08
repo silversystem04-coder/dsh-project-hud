@@ -44,10 +44,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/dsh-project-tabs.git"
+    "url": "git+https://github.com/silversystem04-coder/dsh-project-tabs.git"
   },
-  "homepage": "https://github.com/OWNER/dsh-project-tabs#readme",
+  "homepage": "https://github.com/silversystem04-coder/dsh-project-tabs#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/dsh-project-tabs/issues"
+    "url": "https://github.com/silversystem04-coder/dsh-project-tabs/issues"
   }
 }

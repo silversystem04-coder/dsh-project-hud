@@ -1,0 +1,53 @@
+{
+  "name": "dsh-project-tabs",
+  "version": "0.2.0",
+  "description": "DSH 插件：窗口最上方一排标签角——线卡 + 实时会话卡 + 手写卡，含进度、当前步骤、收纳与自定义 / Top-edge tabs: project lines, live sessions with current step, manual cards, shelf and inline editing.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "README.md",
+    "LICENSE",
+    "install.ps1"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "project",
+    "progress",
+    "hud",
+    "sessions",
+    "live"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/dsh-project-tabs.git"
+  },
+  "homepage": "https://github.com/OWNER/dsh-project-tabs#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/dsh-project-tabs/issues"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+test/visual.html
+*.bak
+*.bak-*
+tmp-block.txt
+.DS_Store
+Thumbs.db

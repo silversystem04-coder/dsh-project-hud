@@ -1,8 +1,8 @@
-# install.ps1 -- put dsh-project-tabs into a DeepSeek Harness desktop profile.
+# install.ps1 -- put dsh-project-hud into a DeepSeek Harness desktop profile.
 #
 # Three steps, same as the other hand-written plugins:
-#   1. copy the source to <profile>\plugins\dsh-project-tabs
-#   2. overwrite-copy to <profile>\node_modules\dsh-project-tabs (Node caches modules by
+#   1. copy the source to <profile>\plugins\dsh-project-hud
+#   2. overwrite-copy to <profile>\node_modules\dsh-project-hud (Node caches modules by
 #      realpath, so the whole directory is replaced on every run)
 #   3. append an `insert` block to cordis.patch.yml when it is not there yet
 #
@@ -25,7 +25,7 @@ $ErrorActionPreference = 'Stop'
 $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 
 $src = $PSScriptRoot
-$pluginName = 'dsh-project-tabs'
+$pluginName = 'dsh-project-hud'
 $destPlugins = Join-Path $Profile "plugins\$pluginName"
 $destModules = Join-Path $Profile "node_modules\$pluginName"
 $patchFile = Join-Path $Profile 'cordis.patch.yml'
@@ -50,7 +50,7 @@ Write-Host "copied  $destPlugins"
 Write-Host "copied  $destModules"
 
 $existing = [System.IO.File]::ReadAllText($patchFile, $Utf8NoBom)
-if ($existing -match "dsh-project-tabs") {
+if ($existing -match "dsh-project-hud") {
   Write-Host "patch   already present, skipped"
 } else {
   $config = ''
@@ -60,16 +60,16 @@ if ($existing -match "dsh-project-tabs") {
   }
   $block = @"
 
-# --- project-tabs (top-edge project tabs) -------------------------------------
+# --- project-hud (top-edge project tabs) -------------------------------------
 # A row of small tags hanging from the window's top edge. Hover one and a card drops
 # down: what this line is, stage progress, the current step, the remaining steps from
 # the handoff doc, and what to watch out for. Live sessions and hand-written cards
 # show up there too.
-# Source and notes: plugins/dsh-project-tabs/README.md
+# Source and notes: plugins/dsh-project-hud/README.md
 # Uninstall: delete this insert block and reload the client.
 - insert:
-    - id: project-tabs
-      name: 'dsh-project-tabs'
+    - id: project-hud
+      name: 'dsh-project-hud'
       config:
         maxTabs: 5
         cacheMs: 5000$config

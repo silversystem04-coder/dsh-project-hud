@@ -1,5 +1,5 @@
 /**
- * dsh-project-tabs -- 窗口最上方的一排标签角。
+ * dsh-project-hud -- 窗口最上方的一排标签角。
  *
  * 鼠标停在某个角上，往下弹一张卡：这条线在干什么、进度几比几、进度条、
  * 卡在哪一步、以及交接单里写死的下一步和细化建议。
@@ -22,7 +22,7 @@ import path from 'node:path';
 import { readBoard } from './lib/board.js';
 import { mutate } from './lib/store.js';
 
-export const name = 'project-tabs';
+export const name = 'project-hud';
 
 /**
  * 2026-11-04 事故之后改的两件事，都是为了「别静默消失」：
@@ -35,9 +35,9 @@ export const name = 'project-tabs';
 export const inject = ['webServer'];
 
 /** 手改；出现在 /ping 里，好判断模块缓存是不是旧的。 */
-const BUILD = '0.2.1+20261108';
+const BUILD = '0.3.0+20261109';
 
-const PREFIX = '/project-tabs';
+const PREFIX = '/project-hud';
 const MAX_BODY = 128 * 1024;
 
 function dshHome() {
@@ -127,7 +127,7 @@ export async function apply(ctx, config) {
   // 不同 cordis 版本把服务挂在 ctx 上还是只能 ctx.get 拿到。
   const webServer = ctx.webServer || (typeof ctx.get === 'function' ? ctx.get('webServer') : undefined);
   if (!webServer || typeof webServer.register !== 'function') {
-    log('[project-tabs] 没有 webServer，标签角不会出现');
+    log('[project-hud] 没有 webServer，标签角不会出现');
   } else {
     const handler = async (req, res) => {
       let url;
@@ -163,7 +163,7 @@ export async function apply(ctx, config) {
         // 而 preflight 也会打到 isLoopback/siteAllowed 上被挡下来（我们对 OPTIONS 一律 405）。
         if (p === PREFIX + '/api/mutate') {
           if (req.method !== 'POST') { send(res, 405, { error: 'POST only' }); return; }
-          if (String(req.headers['x-project-tabs'] || '') !== '1') { send(res, 403, { error: 'missing header' }); return; }
+          if (String(req.headers['x-project-hud'] || '') !== '1') { send(res, 403, { error: 'missing header' }); return; }
           if (!/^application\/json/i.test(String(req.headers['content-type'] || ''))) {
             send(res, 415, { error: 'application/json required' }); return;
           }
@@ -190,11 +190,11 @@ export async function apply(ctx, config) {
 
     try {
       const dispose = webServer.register({ kind: 'prefix', path: PREFIX, handler });
-      ctx.effect?.(() => dispose, 'project-tabs: http routes');
+      ctx.effect?.(() => dispose, 'project-hud: http routes');
       const port = webServer.port;
-      if (port) log(`[project-tabs] tabs API on http://127.0.0.1:${port}${PREFIX}/api/cards`);
+      if (port) log(`[project-hud] tabs API on http://127.0.0.1:${port}${PREFIX}/api/cards`);
     } catch (error) {
-      log(`[project-tabs] webServer 注册失败: ${error.message}`);
+      log(`[project-hud] webServer 注册失败: ${error.message}`);
     }
   }
 
@@ -203,7 +203,7 @@ export async function apply(ctx, config) {
     const tools = ctx.get('tools');
     if (!tools || typeof tools.register !== 'function') return;
     tools.register(defineTool({
-      name: 'project_tabs',
+      name: 'project_hud',
       description:
         '项目标签角的数据：每条线（职鱼/衣鱼/广接…）的状态、阶段进度 done/total、'
         + '最近截止倒计时、交接单里写明的下一步与待做、该怎么推；'
@@ -289,8 +289,8 @@ export async function apply(ctx, config) {
       },
     }));
   }).catch((error) => {
-    log(`[project-tabs] 工具没注册上: ${error && error.message}`);
+    log(`[project-hud] 工具没注册上: ${error && error.message}`);
   });
 
-  log(`[project-tabs] ${BUILD} ready (brain=${cfg.brainDir}, sessions=${cacheDir})`);
+  log(`[project-hud] ${BUILD} ready (brain=${cfg.brainDir}, sessions=${cacheDir})`);
 }

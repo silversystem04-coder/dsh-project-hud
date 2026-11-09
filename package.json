@@ -1,7 +1,7 @@
 {
-  "name": "dsh-project-tabs",
-  "version": "0.2.1",
-  "description": "DSH 插件：窗口最上方一排标签角——线卡 + 实时会话卡 + 手写卡，含进度、当前步骤、收纳与自定义 / Top-edge tabs: project lines, live sessions with current step, manual cards, shelf and inline editing.",
+  "name": "dsh-project-hud",
+  "version": "0.3.0",
+  "description": "DSH 插件：窗口最上方一排标签角——线卡 + 实时会话卡 + 手写卡，含进度、当前步骤、收纳与自定义 / Top-edge HUD: project lines, live sessions with current step, manual cards, shelf and inline editing.",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -44,10 +44,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/silversystem04-coder/dsh-project-tabs.git"
+    "url": "git+https://github.com/silversystem04-coder/dsh-project-hud.git"
   },
-  "homepage": "https://github.com/silversystem04-coder/dsh-project-tabs#readme",
+  "homepage": "https://github.com/silversystem04-coder/dsh-project-hud#readme",
   "bugs": {
-    "url": "https://github.com/silversystem04-coder/dsh-project-tabs/issues"
-  }
+    "url": "https://github.com/silversystem04-coder/dsh-project-hud/issues"
+  },
+  "author": "silversystem04-coder"
 }

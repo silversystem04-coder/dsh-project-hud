@@ -227,8 +227,14 @@ const live = readLiveSessions(cacheDir, { now: Date.now() });
 ok('读得到缓存目录', () => assert.equal(live.ok, true, live.error || ''));
 ok('窗口内会话都有当前步骤', () => {
   for (const s of live.sessions) {
-    assert.ok(typeof s.currentStep === 'string' && s.currentStep.length > 0, `${s.id} 没有当前步骤`);
-    assert.ok(['step', 'prompt'].includes(s.currentKind));
+    if (s.turns > 0) {
+      assert.ok(typeof s.currentStep === 'string' && s.currentStep.length > 0, `${s.id} 没有当前步骤`);
+      assert.ok(['step', 'prompt', 'response'].includes(s.currentKind));
+    } else {
+      // 刚开、还没说过话的会话：不许替它编一个步骤。
+      assert.equal(s.currentStep, '');
+      assert.equal(s.currentKind, '');
+    }
     assert.ok(s.tokens.pct >= 0 && s.tokens.pct <= 1.5);
   }
 });
